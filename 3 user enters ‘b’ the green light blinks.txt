@@ -1,0 +1,63 @@
+// Pin for the LEDs
+const int greenLedPin = 2;  // Connect the green LED to pin 2
+const int yellowLedPin = 3; // Connect the yellow LED to pin 3
+const int redLedPin = 4;    // Connect the red LED to pin 4
+
+void setup() {
+  pinMode(greenLedPin, OUTPUT);  // Set the green LED pin as an output
+  pinMode(yellowLedPin, OUTPUT); // Set the yellow LED pin as an output
+  pinMode(redLedPin, OUTPUT);    // Set the red LED pin as an output
+  Serial.begin(9600);            // Initialize serial communication
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    char userChar = Serial.read(); // Read the user input
+
+    // Perform actions based on user input
+    switch (userChar) {
+      case 'b':
+        blinkGreenLED();
+        break;
+      case 'g':
+        illuminateGreenLED();
+        break;
+      case 'y':
+        illuminateYellowLED();
+        break;
+      case 'r':
+        illuminateRedLED();
+        break;
+      default:
+        // Do nothing for unrecognized input
+        break;
+    }
+  }
+}
+
+void blinkGreenLED() {
+  for (int i = 0; i < 5; ++i) {
+    digitalWrite(greenLedPin, HIGH);
+    delay(500);
+    digitalWrite(greenLedPin, LOW);
+    delay(500);
+  }
+}
+
+void illuminateGreenLED() {
+  digitalWrite(greenLedPin, HIGH);
+  digitalWrite(yellowLedPin, LOW);
+  digitalWrite(redLedPin, LOW);
+}
+
+void illuminateYellowLED() {
+  digitalWrite(greenLedPin, LOW);
+  digitalWrite(yellowLedPin, HIGH);
+  digitalWrite(redLedPin, LOW);
+}
+
+void illuminateRedLED() {
+  digitalWrite(greenLedPin, LOW);
+  digitalWrite(yellowLedPin, LOW);
+  digitalWrite(redLedPin, HIGH);
+}

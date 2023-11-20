@@ -1,0 +1,41 @@
+// Pin configuration for potentiometers
+const int redPotPin = A0;
+const int greenPotPin = A1;
+const int bluePotPin = A2;
+
+// Pin configuration for RGB LED
+const int redLedPin = 9;
+const int greenLedPin = 10;
+const int blueLedPin = 11;
+
+void setup() {
+  Serial.begin(9600); // Initialize serial communication
+  pinMode(redPotPin, INPUT);
+  pinMode(greenPotPin, INPUT);
+  pinMode(bluePotPin, INPUT);
+  pinMode(redLedPin, OUTPUT);
+  pinMode(greenLedPin, OUTPUT);
+  pinMode(blueLedPin, OUTPUT);
+}
+
+void loop() {
+  // Read potentiometer values
+  int redValue = analogRead(redPotPin) / 4;    // Map 0-1023 to 0-255
+  int greenValue = analogRead(greenPotPin) / 4; // Map 0-1023 to 0-255
+  int blueValue = analogRead(bluePotPin) / 4;   // Map 0-1023 to 0-255
+
+  // Update LED color
+  analogWrite(redLedPin, redValue);
+  analogWrite(greenLedPin, greenValue);
+  analogWrite(blueLedPin, blueValue);
+
+  // Print potentiometer values to Serial Monitor
+  Serial.print("Red: ");
+  Serial.print(redValue);
+  Serial.print("\tGreen: ");
+  Serial.print(greenValue);
+  Serial.print("\tBlue: ");
+  Serial.println(blueValue);
+
+  delay(100); // Adjust the delay according to your needs
+}

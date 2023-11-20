@@ -1,0 +1,22 @@
+void setup() {
+  Serial.begin(9600); // Initialize serial communication
+}
+
+void loop() {
+  int userNumber;
+
+Serial.print("Enter number:");
+  // Clear any remaining characters from the serial buffer
+  while (Serial.available()==0) {
+ 
+  }
+int userNumber = Serial.parseInt();
+  // Calculate and print the square of the entered number
+  int square = userNumber * userNumber;
+  Serial.print("The square of ");
+  Serial.print(userNumber);
+  Serial.print(" is: ");
+  Serial.println(square);
+
+  delay(1000); // Adjust the delay according to your needs
+}
